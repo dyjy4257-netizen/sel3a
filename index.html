@@ -6,254 +6,54 @@
     <title>السلعة | منصة النخبة</title>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-    /* --- الكود الأصلي حقك بدون تعديل --- */
-    .ad-modal {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0, 0, 0, 0.9); backdrop-filter: blur(15px);
-    display: flex; justify-content: center; align-items: center; z-index: 9999;
-}
-.modal-content {
-    background: #121212; width: 90%; max-width: 800px; border-radius: 30px;
-    border: 1px solid rgba(255, 255, 255, 0.1); padding: 30px;
-    display: flex; flex-wrap: wrap; gap: 20px; position: relative;
-}
-.modal-img-side { flex: 1; min-width: 280px; }
-.modal-img-side img { width: 100%; border-radius: 20px; border: 1px solid #333; }
-.modal-info-side { flex: 1; min-width: 280px; }
-.close-modal { position: absolute; top: 15px; left: 15px; font-size: 35px; cursor: pointer; color: #fff; }
-
         :root {
-            --gold-gradient: linear-gradient(135deg, #d4af37 0%, #f9f295 50%, #b38728 100%);
             --red-gradient: linear-gradient(135deg, #e63946, #9b2226);
             --dark-surface: #121212;
             --glass: rgba(255, 255, 255, 0.03);
             --border: rgba(255, 255, 255, 0.1);
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Tajawal', sans-serif;
-            transition: 0.3s ease-in-out;
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Tajawal', sans-serif; transition: 0.3s ease-in-out; }
+        body { background: #080808; color: #ffffff; overflow-x: hidden; }
+
+        .logo:hover, .nav-btn:hover, .card:hover, .btn-search:hover {
+            filter: drop-shadow(0 0 8px rgba(230, 57, 70, 0.6));
         }
 
-        body {
-            background: #080808;
-            color: #ffffff;
-            overflow-x: hidden;
-        }
+        .bg-glow { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 50% -20%, #450a0a 0%, transparent 50%); z-index: -1; }
 
-        /* إضافة تأثير الشعاع اللي طلبته */
-        .card:hover, .nav-btn:hover, .cat-btn:hover, .btn-search:hover, .add-ad-btn:hover {
-            box-shadow: 0 0 20px rgba(230, 57, 70, 0.6) !important;
-            filter: brightness(1.1);
-        }
-
-        .bg-glow {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at 50% -20%, #450a0a 0%, transparent 50%);
-            z-index: -1;
-        }
-
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 8%;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .logo {
-            font-size: 32px;
-            font-weight: 900;
-            color: #fff;
-            letter-spacing: -1px;
-        }
+        .navbar { display: flex; justify-content: space-between; align-items: center; padding: 20px 8%; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 1000; }
+        .logo { font-size: 32px; font-weight: 900; color: #fff; }
         .logo span { color: #e63946; }
 
-        .nav-links {
-            display: flex;
-            gap: 20px;
-        }
+        .nav-links { display: flex; gap: 20px; }
+        .nav-btn { background: var(--glass); border: 1px solid var(--border); padding: 12px 25px; border-radius: 15px; cursor: pointer; text-decoration: none; color: #fff; display: flex; flex-direction: column; align-items: center; min-width: 90px; }
+        .nav-btn:hover { background: rgba(230, 57, 70, 0.1); border-color: #e63946; transform: translateY(-5px); }
+        .nav-btn i { font-style: normal; font-size: 20px; margin-bottom: 5px; }
+        .nav-btn span { font-size: 11px; font-weight: 700; opacity: 0.8; }
 
-        .nav-btn {
-            background: var(--glass);
-            border: 1px solid var(--border);
-            padding: 12px 25px;
-            border-radius: 15px;
-            cursor: pointer;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-width: 90px;
-            text-decoration: none;
-            color: #fff;
-        }
-
-        .msg-badge {
-            position: absolute;
-            top: -5px; right: -5px;
-            background: #e63946;
-            color: white;
-            font-size: 10px;
-            padding: 2px 7px;
-            border-radius: 50px;
-            box-shadow: 0 0 15px #e63946;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.2); opacity: 0.8; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-
-        .search-container {
-            padding: 80px 5% 40px;
-            text-align: center;
-        }
-
-        /* تنسيق التصنيفات */
-        .categories-grid {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 25px;
-            flex-wrap: wrap;
-        }
-        .cat-btn {
-            background: #1a1a1a;
-            border: 1px solid var(--border);
-            color: white;
-            padding: 8px 20px;
-            border-radius: 50px;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 14px;
-        }
-
-        .search-wrapper {
-            background: #1a1a1a;
-            max-width: 850px;
-            margin: 0 auto;
-            padding: 8px;
-            border-radius: 20px;
-            display: flex;
-            border: 1px solid var(--border);
-            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
-        }
-
-        .search-wrapper input {
-            flex: 3;
-            background: transparent;
-            border: none;
-            padding: 15px 25px;
-            color: #fff;
-            outline: none;
-            font-size: 18px;
-        }
-
-        .search-wrapper select {
-            flex: 1;
-            background: #1a1a1a;
-            color: #ffffff;
-            border: none;
-            border-right: 1px solid var(--border);
-            padding: 0 15px;
-            outline: none;
-            cursor: pointer;
-            appearance: none;
-            -webkit-appearance: none;
-            background-image: url('data:image/svg+xml;utf8,<svg fill="%23e63946" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
-            background-repeat: no-repeat;
-            background-position: left 10px center;
-        }
-
-        .btn-search {
-            background: var(--red-gradient);
-            border: none;
-            padding: 0 40px;
-            border-radius: 15px;
-            color: #fff;
-            font-weight: 900;
-            cursor: pointer;
-        }
+        .search-container { padding: 80px 5% 40px; text-align: center; }
+        .search-wrapper { background: #1a1a1a; max-width: 900px; margin: 0 auto; padding: 8px; border-radius: 20px; display: flex; border: 1px solid var(--border); box-shadow: 0 25px 50px rgba(0,0,0,0.5); }
+        .search-wrapper select { flex: 1.2; background: #1a1a1a; color: #fff; border: none; border-left: 1px solid var(--border); padding: 0 15px; outline: none; cursor: pointer; }
+        .search-wrapper input { flex: 3; background: transparent; border: none; padding: 15px 25px; color: #fff; outline: none; font-size: 18px; }
+        .btn-search { background: var(--red-gradient); border: none; padding: 0 40px; border-radius: 15px; color: #fff; font-weight: 900; cursor: pointer; }
 
         .main-content { padding: 40px 8%; }
         .grid-title { margin-bottom: 30px; font-size: 26px; font-weight: 900; }
         .grid-title span { color: #e63946; }
 
-        .ads-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
-        .card {
-            background: #161616;
-            border-radius: 25px;
-            overflow: hidden;
-            border: 1px solid var(--border);
-            position: relative;
-        }
-
-        .card img {
-            width: 100%; height: 250px;
-            object-fit: cover;
-            transition: 0.5s;
-        }
-
+        .ads-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 30px; }
+        .card { background: #161616; border-radius: 25px; overflow: hidden; border: 1px solid var(--border); cursor: pointer; position: relative; }
+        .card:hover { transform: translateY(-10px); border-color: #e63946; }
+        .card img { width: 100%; height: 250px; object-fit: cover; }
         .card-body { padding: 20px; }
-        .card-body h4 { font-size: 18px; margin-bottom: 10px; }
-        .price-tag {
-            color: #e63946;
-            font-size: 22px;
-            font-weight: 900;
-            display: block;
-            margin-top: 10px;
-        }
+        .price-tag { color: #e63946; font-size: 22px; font-weight: 900; display: block; margin-top: 10px; }
+        .city-tag { font-size: 12px; color: #666; margin-bottom: 8px; display: block; }
 
-        .city-tag {
-            font-size: 12px;
-            color: #666;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        footer { text-align: center; padding: 60px; color: #444; border-top: 1px solid var(--border); margin-top: 50px; }
-        
-        .profile-container { position: relative; display: inline-block; }
-        .dropdown-menu {
-            display: none;
-            position: absolute;
-            top: 120%;
-            left: 0;
-            min-width: 200px;
-            background: rgba(20, 20, 20, 0.95);
-            backdrop-filter: blur(15px);
-            border: 1px solid var(--border);
-            border-radius: 15px;
-            z-index: 2000;
-        }
-        .dropdown-menu.show { display: block !important; }
-
-        .add-ad-btn {
-            position: fixed; bottom: 30px; left: 30px;
-            background: var(--red-gradient); width: 70px; height: 70px;
-            border-radius: 50%; display: flex; flex-direction: column;
-            align-items: center; justify-content: center; color: #fff;
-            text-decoration: none; z-index: 2000;
-        }
-    </style> 
+        .ad-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); backdrop-filter: blur(15px); display: none; justify-content: center; align-items: center; z-index: 9999; }
+        .modal-content { background: #121212; width: 90%; max-width: 600px; padding: 40px; border-radius: 30px; position: relative; border: 1px solid var(--border); text-align: center; }
+        .close-modal { position: absolute; top: 20px; left: 20px; font-size: 30px; cursor: pointer; color: #fff; }
+    </style>
 </head>
 <body>
 
@@ -262,141 +62,109 @@
 <nav class="navbar">
     <div class="logo">الـ<span>سلعة</span></div>
     <div class="nav-links">
-        <a href="mas.html" class="nav-btn"><i>💬</i><span>الرسائل</span><div class="msg-badge">3</div></a>
-        <div class="nav-btn"><i>🔔</i><span>الإشعارات</span></div>
-        <div class="profile-container">
-            <div class="nav-btn" style="background: var(--red-gradient); border: none;" onclick="toggleProfileMenu()"><i>👤</i><span>حسابي</span></div>
-            <div class="dropdown-menu" id="profileDropdown">
-                <a href="#" style="display:block; padding:15px; color:white; text-decoration:none;">📦 إعلاناتي</a>
-                <a href="#" style="display:block; padding:15px; color:white; text-decoration:none;">⚙️ الإعدادات</a>
-            </div>
-        </div>
+        <div class="nav-btn"><i>💬</i><span>الرسائل</span></div>
+        <div class="nav-btn" style="background: var(--red-gradient); border: none;"><i>👤</i><span>حسابي</span></div>
     </div>
 </nav>
 
 <div class="search-container">
-    <h1 style="font-size: 45px; font-weight: 900; margin-bottom: 30px;">ابحث عن تميزك في <span style="color: #e63946;">السلعة</span></h1>
-    
-    <div class="categories-grid">
-        <button class="cat-btn">🚗 سيارات</button>
-        <button class="cat-btn">📱 جوالات</button>
-        <button class="cat-btn">🏠 عقارات</button>
-        <button class="cat-btn">⌚ ساعات</button>
-        <button class="cat-btn">🎮 ألعاب</button>
-    </div>
-
+    <h1>ابحث عن تميزك في <span style="color: #e63946;">السلعة</span></h1>
     <div class="search-wrapper">
-        <select id="cityList"><option>كل المدن</option></select>
+        <select id="locationFilter" onchange="filterAds()">
+            <option value="all">كل المناطق</option>
+            <optgroup label="السعودية">
+                <option value="الرياض">الرياض</option>
+                <option value="جدة">جدة</option>
+                <option value="الدمام">الدمام</option>
+                <option value="مكة">مكة</option>
+            </optgroup>
+            <optgroup label="مصر">
+                <option value="القاهرة">القاهرة</option>
+                <option value="الإسكندرية">الإسكندرية</option>
+                <option value="المنصورة">المنصورة</option>
+            </optgroup>
+            <optgroup label="سوريا">
+                <option value="دمشق">دمشق</option>
+                <option value="حلب">حلب</option>
+                <option value="حمص">حمص</option>
+            </optgroup>
+        </select>
         <input type="text" placeholder="ما الذي تبحث عنه؟">
         <button class="btn-search">بـحـث</button>
     </div>
 </div>
 
 <main class="main-content">
-    <h2 class="grid-title">أحدث <span>الإعلانات</span></h2>
+    <h2 class="grid-title" id="displayTitle">أحدث <span>الإعلانات</span></h2>
     <div class="ads-grid" id="adsGrid"></div>
 </main>
 
-<footer>© 2026 منصة السلعة - جميع الحقوق محفوظة</footer>
-
-<a href="add-ad.html" class="add-ad-btn"><i>+</i><span>أضف إعلان</span></a>
-
-<div class="ad-modal" id="adModal" style="display:none;">
+<div class="ad-modal" id="adModal">
     <div class="modal-content">
         <span class="close-modal" onclick="closeModal()">&times;</span>
-        <div class="modal-img-side" id="mImg"></div>
-        <div class="modal-info-side">
-            <h2 id="mTitle" style="color:#e63946; margin-bottom:5px;"></h2>
-            <div style="font-size: 12px; color: #888; margin-bottom: 15px; display: flex; gap: 15px;">
-                <span id="mDate"></span>
-                <span id="mTime"></span>
-            </div>
-            <span class="price" id="mPrice" style="font-size:28px; color:#ffd700; font-weight:900;"></span>
-            <p id="mDesc" style="color:#ccc; line-height:1.6; margin:15px 0; border-top: 1px solid #333; padding-top: 15px;"></p>
-            <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 12px; margin-bottom: 20px; border: 1px solid #333;">
-                <p style="font-size: 13px; color: #aaa; margin-bottom: 5px;">📞 رقم التواصل:</p>
-                <span id="mPhone" style="font-size: 18px; font-weight: bold;"></span>
-            </div>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-                <button onclick="window.location.href='mas.html'" style="background:#e63946; color:#fff; border:none; padding:15px; border-radius:12px; cursor:pointer; font-weight:bold;">💬 مراسلة</button>
-                <a id="callBtn" href="#" style="background:#2ecc71; color:#fff; border:none; padding:15px; border-radius:12px; cursor:pointer; font-weight:bold; text-align: center; text-decoration: none;">📞 اتصال</a>
-            </div>
-        </div>
+        <h2 id="mTitle"></h2>
+        <p id="mCity" style="color: #e63946; margin: 15px 0;"></p>
+        <p id="mDesc" style="color: #888; line-height: 1.6;"></p>
     </div>
 </div>
 
 <script>
-    // بيانات أصحاب السلع الواقعية
-    const ownerTitles = ["مرسيدس S500 موديل 2024", "آيفون 15 برو ماكس جديد", "فيلا مودرن للبيع حي النرجس", "ساعة رولكس صبمارينر أصلي", "بلايستيشن 5 مع يدين"];
-    const ownerDescs = [
-        "السيارة وكالة ماشية 5 آلاف فقط، فل كامل، البيع للصامل.",
-        "الجهاز بكرتونه لم يفتح، ضمان حاسبات العرب سنتين.",
-        "فيلا فاخرة بناء شخصي، مساحة 300م، تشطيب سوبر لوكس.",
-        "ساعة نظيفة جداً مع كامل ملحقاتها والبوكس الأصلي.",
-        "نظيف جداً استخدامه قليل ومعاه 3 ألعاب هدية."
+    const adsData = [
+        { title: "سيارة مرسيدس G-Class", city: "الرياض", price: "450,000" },
+        { title: "شقة مطلة على النيل", city: "القاهرة", price: "2,500,000" },
+        { title: "فيلا فاخرة بحي الروضة", city: "جدة", price: "1,200,000" },
+        { title: "جوال آيفون 15 برو", city: "دمشق", price: "12,000,000" },
+        { title: "محل تجاري للإيجار", city: "الإسكندرية", price: "20,000" },
+        { title: "ساعة رولكس أصلية", city: "الدمام", price: "60,000" },
+        { title: "معدات مطاعم متكاملة", city: "حلب", price: "50,000" },
+        { title: "أرض زراعية واسعة", city: "المنصورة", price: "800,000" }
     ];
-    const cities = ["الرياض", "جدة", "مكة", "الخبر", "أبها"];
-    const timeAgo = ["قبل 10 دقائق", "قبل ساعتين", "قبل 5 ساعات", "قبل يومين", "قبل أسبوع", "قبل شهر"];
 
-    const grid = document.getElementById('adsGrid');
-    const select = document.getElementById('cityList');
-
-    cities.forEach(c => {
-        let opt = document.createElement('option');
-        opt.value = c; opt.innerText = c;
-        select.appendChild(opt);
-    });
-
-    // توليد الإعلانات
-    for(let i=1; i<=12; i++) {
-        const rIdx = Math.floor(Math.random() * ownerTitles.length);
-        const randomCity = cities[Math.floor(Math.random() * cities.length)];
-        const randomTime = timeAgo[Math.floor(Math.random() * timeAgo.length)];
-        const randomPrice = Math.floor(Math.random() * 50000) + 1000;
-
-        grid.innerHTML += `
-            <div class="card" data-owner-title="${ownerTitles[rIdx]}" data-owner-desc="${ownerDescs[rIdx]}" data-post-time="${randomTime}">
-                <img src="https://picsum.photos/600/500?random=${i}" alt="Product">
-                <div class="card-body">
-                    <div class="city-tag">📍 ${randomCity} | 🕒 ${randomTime}</div>
-                    <h4>${ownerTitles[rIdx]}</h4>
-                    <span class="price-tag">${randomPrice.toLocaleString()} ر.س</span>
+    function renderAds(data) {
+        const grid = document.getElementById('adsGrid');
+        grid.innerHTML = "";
+        data.forEach((ad, index) => {
+            grid.innerHTML += `
+                <div class="card" onclick="openAd('${ad.title}', '${ad.city}', 'تفاصيل الإعلان المميز في مدينة ${ad.city}')">
+                    <img src="https://picsum.photos/600/500?random=${index + 10}">
+                    <div class="card-body">
+                        <span class="city-tag">📍 ${ad.city}</span>
+                        <h4>${ad.title}</h4>
+                        <span class="price-tag">${ad.price} ر.س</span>
+                    </div>
                 </div>
-            </div>
-        `;
+            `;
+        });
     }
 
-    function toggleProfileMenu() { document.getElementById("profileDropdown").classList.toggle("show"); }
+    function filterAds() {
+        const val = document.getElementById('locationFilter').value;
+        const title = document.getElementById('displayTitle');
+        
+        if (val === "all") {
+            title.innerHTML = "أحدث <span>الإعلانات</span>";
+            renderAds(adsData);
+        } else {
+            title.innerHTML = `إعلانات في <span>${val}</span>`;
+            const filtered = adsData.filter(ad => ad.city === val);
+            renderAds(filtered);
+        }
+    }
+
+    function openAd(title, city, desc) {
+        document.getElementById('mTitle').innerText = title;
+        document.getElementById('mCity').innerText = "المنطقة: " + city;
+        document.getElementById('mDesc').innerText = desc;
+        document.getElementById('adModal').style.display = 'flex';
+    }
 
     function closeModal() { document.getElementById('adModal').style.display = 'none'; }
 
-    document.addEventListener('click', function (e) {
-        const card = e.target.closest('.card'); 
-        if (card) {
-            const title = card.getAttribute('data-owner-title');
-            const desc = card.getAttribute('data-owner-desc');
-            const time = card.getAttribute('data-post-time');
-            const price = card.querySelector('.price-tag').innerText;
-            const img = card.querySelector('img').src;
-            const phone = "05" + Math.floor(10000000 + Math.random() * 90000000);
+    renderAds(adsData);
 
-            document.getElementById('mTitle').innerText = title;
-            document.getElementById('mPrice').innerText = price;
-            document.getElementById('mImg').innerHTML = `<img src="${img}" style="width:100%; border-radius:20px;">`;
-            document.getElementById('mDesc').innerText = desc;
-            document.getElementById('mDate').innerText = "📅 نشر: " + time;
-            document.getElementById('mPhone').innerText = phone;
-            document.getElementById('callBtn').href = `tel:${phone}`;
-            document.getElementById('adModal').style.display = 'flex';
-        }
-    });
-
-    window.onclick = function(event) {
-        if (event.target == document.getElementById('adModal')) closeModal();
-        if (!event.target.closest('.profile-container')) document.getElementById("profileDropdown").classList.remove("show");
+    window.onclick = function(e) {
+        if (e.target == document.getElementById('adModal')) closeModal();
     }
 </script>
-
 </body>
-
 </html>
