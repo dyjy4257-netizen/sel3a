@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>رسائلي | السلعة</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #e63946;
+            --secondary: #9b2226;
+            --dark-bg: #080808;
+            --glass-card: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Tajawal', sans-serif;
+            transition: 0.3s ease;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: #fff;
+            min-height: 100vh;
+        }
+
+        /* الهيدر الفخم */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(20px);
+            padding: 20px 8%;
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header .logo {
+            font-size: 28px;
+            font-weight: 900;
+            cursor: pointer;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .header .logo span { color: var(--primary); }
+
+        .page-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #ccc;
+        }
+
+        /* قائمة الرسائل */
+        .container {
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .msg-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .msg-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px;
+            border-radius: 20px;
+            background: var(--glass-card);
+            border: 1px solid var(--border);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .msg-item:hover {
+            background: rgba(230, 57, 70, 0.05);
+            border-color: var(--primary);
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .msg-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .avatar-box {
+            position: relative;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #1a1a1a, #333);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 28px;
+            border: 1px solid var(--border);
+        }
+
+        /* نقطة أونلاين */
+        .online-dot {
+            position: absolute;
+            bottom: 2px;
+            right: 2px;
+            width: 14px;
+            height: 14px;
+            background: #2ecc71;
+            border: 2px solid var(--dark-bg);
+            border-radius: 50%;
+        }
+
+        .name-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .name {
+            font-weight: 900;
+            font-size: 17px;
+            color: #fff;
+        }
+
+        .last-msg {
+            font-size: 13px;
+            color: #888;
+            max-width: 200px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* العداد المشتعل */
+        .badge {
+            background: var(--primary);
+            color: #fff;
+            border-radius: 50px;
+            padding: 4px 12px;
+            font-size: 12px;
+            font-weight: 900;
+            box-shadow: 0 0 15px rgba(230, 57, 70, 0.5);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); box-shadow: 0 0 25px rgba(230, 57, 70, 0.7); }
+            100% { transform: scale(1); }
+        }
+
+        /* زر العودة للرئيسية في الأسفل */
+        .back-home {
+            text-align: center;
+            margin-top: 40px;
+        }
+        .back-home a {
+            color: #555;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        .back-home a:hover { color: var(--primary); }
+
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <div class="logo" onclick="goHome()">الـ<span>سلعة</span></div>
+    <div class="page-title">صندوق الرسائل</div>
+    <div style="width: 50px;"></div> </div>
+
+<div class="container">
+    <ul class="msg-list" id="msgList">
+        </ul>
+
+    <div class="back-home">
+        <a href="html330.html">← العودة للرئيسية</a>
+    </div>
+</div>
+
+<script>
+const users = [
+    {name: "أحمد العتيبي", avatar: "🧑", unread: 3, last: "هل المنتج لازال متوفر؟"},
+    {name: "سارة القحطاني", avatar: "👩", unread: 1, last: "تم تحويل المبلغ، شكراً لك"},
+    {name: "خالد بن محمد", avatar: "👨", unread: 0, last: "اتفقنا، نتقابل غداً بإذن الله"},
+    {name: "منى الدوسري", avatar: "👩‍💼", unread: 2, last: "ممكن صور أكثر للمنتج؟"},
+    {name: "فيصل الحربي", avatar: "🧑‍💻", unread: 4, last: "كم آخر سعر للصامل؟"}
+];
+
+const list = document.getElementById("msgList");
+
+function renderList() {
+    list.innerHTML = "";
+    users.forEach(u => {
+        const li = document.createElement("li");
+        li.className = "msg-item";
+        li.innerHTML = `
+            <div class="msg-info">
+                <div class="avatar-box">
+                    ${u.avatar}
+                    <div class="online-dot"></div>
+                </div>
+                <div class="name-meta">
+                    <span class="name">${u.name}</span>
+                    <span class="last-msg">${u.last}</span>
+                </div>
+            </div>
+            ${u.unread > 0 ? `<span class="badge">${u.unread}</span>` : ""}
+        `;
+        li.onclick = () => {
+            u.unread = 0; 
+            renderList();
+            // التوجيه لصفحة الشات مع تمرير الاسم
+            window.location.href = `chat.html?name=${encodeURIComponent(u.name)}`;
+        };
+        list.appendChild(li);
+    });
+}
+
+function goHome() {
+    window.location.href = "html330.html";
+}
+
+renderList();
+</script>
+
+</body>
+</html>
